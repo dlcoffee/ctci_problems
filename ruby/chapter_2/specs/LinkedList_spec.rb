@@ -33,111 +33,128 @@ describe Node do
     end
 
   end
+end
+
+
+
+describe LinkedList do
+  before do 
+    @ll = LinkedList.new("Biggie")
+  end
+
+  describe "#new" do
+    it 'returns "Biggie" on head value' do
+      expect(@ll.head.data).to eq("Biggie")
+    end
+
+    it 'returns nil when no data specified' do
+      ll = LinkedList.new
+      expect(ll.head.data).to be nil
+    end
+  end
+
 
 
   describe "#append" do
 
     context 'no data specified on init' do
       it 'sets the data at the head' do
-        node = Node.new
-        node.append("Biggie")
-
-        expect(node.data).to eq("Biggie")
+        ll = LinkedList.new
+        ll.append("Biggie")
+        expect(ll.head.data).to eq("Biggie")
       end
-    end
 
-    context 'data exists on head' do
-      it 'sets next to data' do
-        @node.append("Tupac")
-        expect(@node.next.data).to eq("Tupac")
-      end
-    end
+     context 'data exists on head' do
+       it 'sets next to data' do
+         @ll.append("Tupac")
+         expect(@ll.head.next.data).to eq("Tupac")
+       end
+     end
 
-    context 'append twice' do
-      it 'sets next next to data' do
-        @node.append("Tupac")
-        @node.append("Kanye")
+     context 'a lot of nodes' do
+       it 'returns last value as Kendrick' do
+         @ll.append("Tupac")
+         @ll.append("Kanye")
+         @ll.append("Common")
+         @ll.append("Kendrick")
 
-        expect(@node.next.next.data).to eq("Kanye")
+         expect(@ll.tail.data).to eq("Kendrick")
+        end
       end
     end
 
   end
 
 
-  # describe "#delete" do
+  describe "#delete" do
 
-  #   context 'only one node' do
-  #     it 'returns nil on head data' do
-  #       @node.delete("Biggie")
-  #       expect(@node.data).to be nil
-  #     end
-  #   end
+    context 'only one node' do
+      it 'returns nil on head data' do
+        @ll.delete("Biggie")
+        expect(@ll.head.data).to be nil
+      end
+    end
 
-  #   context 'two nodes' do
-  #     before do
-  #       @node.append("Tupac")
-  #     end
+    context 'two nodes' do
+      before do
+        @ll.append("Tupac")
+      end
 
-  #     describe 'delete first' do
-  #       it 'should only have one node with Tupac data' do
-  #         @node.delete("Biggie")
+      describe 'delete first' do
+        it 'should only have one node with Tupac data' do
+          @ll.delete("Biggie")
 
-  #         expect(@node.data).to eq("Tupac")
-  #         expect(@node.next).to be nil
-  #       end
-  #     end
+          expect(@ll.head.data).to eq("Tupac")
+          expect(@ll.head.next).to be nil
+        end
+      end
 
-  #     describe 'delete second' do
-  #       it 'should only have one node with Biggie data' do
-  #         @node.delete("Tupac")
+      describe 'delete second' do
+        it 'should only have one node with Biggie data' do
+          @ll.delete("Tupac")
 
-  #         expect(@node.data).to eq("Biggie")
-  #         expect(@node.next).to be nil
-  #       end
-  #     end
-  #   end
+          expect(@ll.head.data).to eq("Biggie")
+          expect(@ll.head.next).to be nil
+        end
+      end
+    end
 
-  #   context 'three nodes' do
-  #     before do
-  #       @node.append("Tupac")
-  #       @node.append("Kanye")
-  #     end
+    context 'three nodes' do
+      before do
+        @ll.append("Tupac")
+        @ll.append("Kanye")
+      end
 
-  #     describe 'delete first' do
-  #       it 'should only have two nodes with Tupac and Kanye' do
-  #         @node.delete("Biggie")
+      describe 'delete first' do
+        it 'should only have two nodes with Tupac and Kanye' do
+          @ll.delete("Biggie")
 
-  #         expect(@node.data).to eq("Tupac")
-  #         expect(@node.next.data).to eq("Kanye")
-  #         expect(@node.next.next).to be nil
-  #       end
-  #     end
+          expect(@ll.head.data).to eq("Tupac")
+          expect(@ll.head.next.data).to eq("Kanye")
+          expect(@ll.head.next.next).to be nil
+        end
+      end
 
-  #     describe 'delete second' do
-  #       it 'should only have two nodes with Biggie and Kanye' do
-  #         @node.delete("Tupac")
+      describe 'delete second' do
+        it 'should only have two nodes with Biggie and Kanye' do
+          @ll.delete("Tupac")
 
-  #         expect(@node.data).to eq("Biggie")
-  #         expect(@node.next.data).to eq("Kanye")
-  #         expect(@node.next.next).to be nil
-  #       end
-  #     end
+          expect(@ll.head.data).to eq("Biggie")
+          expect(@ll.head.next.data).to eq("Kanye")
+          expect(@ll.head.next.next).to be nil
+        end
+      end
 
-  #     describe 'delete third' do
-  #       it 'should only have two nodes with Biggie and Tupac' do
-  #         @node.delete("Kanye")
+      describe 'delete third' do
+        it 'should only have two nodes with Biggie and Tupac' do
+          @ll.delete("Kanye")
 
-  #         expect(@node.data).to eq("Biggie")
-  #         expect(@node.next.data).to eq("Tupac")
-  #         expect(@node.next.next).to be nil
-  #       end
-  #     end
-  #   end
-
-
-  # end
-  
-
+          expect(@ll.head.data).to eq("Biggie")
+          expect(@ll.head.next.data).to eq("Tupac")
+          expect(@ll.head.next.next).to be nil
+        end
+      end
+    end
+   end
 
 end
